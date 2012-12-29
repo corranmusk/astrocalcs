@@ -20,7 +20,11 @@
  * 
  * 
  */
-
+import java.util.Date;
+import java.text.DateFormat;
+import java.util.Locale;
+//import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CalculateEaster {
 	
@@ -28,13 +32,10 @@ public class CalculateEaster {
 	// From Astronomical Algorithms 2nd Ed, Meeus, J, 2000
 	// Gregorian Calendar valid from 1583
 	
-	static int yr=1992; // year
-	static String[] months={ 
-		"Jan","Feb","Mar","Apr","May","Jun",
-		"Jul","Aug","Sep","Oct","Nov","Dec"
-	};
 	
 	public static void main (String args[]) {
+
+		int yr=1992;
 		
 		int a=yr % 19;
 		int b=yr / 100;
@@ -50,8 +51,12 @@ public class CalculateEaster {
 		int m=(a + (11*h) + (22 *l)) /451;
 		int mth=(h + l - (7*m) + 114 )/31;
 		int dy= ((h + l - (7*m) + 114 ) % 31) + 1;
-	
-		System.out.println ("Easter in " + yr + " falls on Sunday " + dy + " of " + months[mth-1]);
+		// Month is 0 based(!!) hence take one off it for the calendar...
+		GregorianCalendar easterDate=new GregorianCalendar(yr,(mth-1),dy);
+		DateFormat fmt;
+		fmt=DateFormat.getDateInstance(DateFormat.FULL,Locale.UK);
+		
+		System.out.println ("Easter "  + fmt.format(easterDate.getTime()));
 		
 	}
 }
