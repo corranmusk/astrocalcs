@@ -22,6 +22,7 @@
  */
  
 import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
 
 public class ConvertDate {
 	
@@ -49,10 +50,57 @@ public class ConvertDate {
 		
 	}
 	
+	public static GregorianCalendar fromJulianDay ( double JulianDay)
+	{
+		GregorianCalendar gregDate;
+		
+		int z = (int) JulianDay;
+		double f= JulianDay - z;
+		
+		int a;
+		if ( z<2299161){
+			a=z;
+		} else {
+			int alpha= (int) (( z-1867216.25)/36524.25);
+			a=z+1+alpha- (int) (alpha/4);
+		}
+		int b = a+1524;
+		int c = (int) ((b-122.1)/365.25);
+		int d = (int) (365.25 * c);
+		int e = (int) ((b-d)/30.6001);
+		
+		int tmp = (int) (30.6001 *e);
+		int dom = b - d - tmp; // need to add f to this but worried about doubles etc..
+		
+		int mth;
+		if(e<14){
+			mth=e-1;
+		} else {
+			mth=e-13;
+		}
+		int yr;
+		if(mth>2){
+			yr=c-4716;
+		} else {
+			yr=c-4715;
+		}
+		
+		gregDate = new GregorianCalendar(yr,mth-1,dom);
+		
+		return gregDate;
+	}
+	
 	public static void main (String args[]) {
 		
+		double JD;
+		
 		GregorianCalendar testDate=new GregorianCalendar(1957,9,4);
-		System.out.println("Julian Date is " + toJulianDay(testDate));
+		JD=toJulianDay(testDate);
+		System.out.println("Julian Date is " + JD);
+		
+		SimpleDateFormat date_format = new SimpleDateFormat("yyyyMMdd");
+		System.out.println(date_format.format(fromJulianDay(JD).getTime()));
+
 	}
 }
 
