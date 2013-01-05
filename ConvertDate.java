@@ -39,9 +39,7 @@ public class ConvertDate {
 		}
 		
 		int a = yr/100;
-		System.out.println ("a=" + a);
 		int b = 2 -a + (int) (a/4);
-		System.out.println ("b=" + b);
 		int c = (int) (365.25 * (yr + 4716));
 		int d = (int) (30.6 * (mth+1));
 		
