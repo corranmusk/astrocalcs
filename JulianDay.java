@@ -1,5 +1,5 @@
 /*
- * ConvertDate.java
+ * JulianDay.java
  * 
  * Copyright 2013 Corran Musk 
  * 
@@ -20,19 +20,56 @@
  * 
  * 
  */
- 
-import java.util.GregorianCalendar;
-import java.text.SimpleDateFormat;
 
-public class ConvertDate {
+import java.util.GregorianCalendar;
+
+public class JulianDay {
+	
+	double JD;
+	
+	public void JulianDay() {
+		JD=0;
+		// actually this is a place holder this is what will happen...
+		// get current date/time
+		// convert to JD
+	}
+	
+	public void JulianDay(double DateValue){
+		// Constructor setting a value for the JD
+		JD=DateValue;
+	}
+
+	public void JulianDay(GregorianCalendar GregDate){
+		// Consructor for GregorianCalendar object
+		JD=toJulianDay(GregDate);
+	}
+	
+	public double MJD (){
+		// Returns the Modified Julian Day of the current JD
+		double MJDay=MJD(JD);
+		return MJDay;
+	}
+	
+	public static double MJD ( double JDate){
+		// Caluclutes the Modified Julian Day and returns it
+		double MJDay = JDate - 2400000.5;
+		return MJDay;
+	}
 	
 	public static double toJulianDay(GregorianCalendar GregDate)
 	{
 		double JulianDay;
+		
 		int yr=GregDate.get(GregorianCalendar.YEAR);
 		int mth=GregDate.get(GregorianCalendar.MONTH);
 		mth++; // Adjust for fact that Gregorian Date is Jan=0;
 		int day=GregDate.get(GregorianCalendar.DAY_OF_MONTH);
+		
+		//Calculate the time Fraction
+		double tm;
+		tm=GregDate.get(GregorianCalendar.HOUR_OF_DAY)/24;
+		tm+=GregDate.get(GregorianCalendar.MINUTE)/(24*60);
+		tm+=GregDate.get(GregorianCalendar.SECOND)/(24*60*60);
 		
 		if (mth>2) {
 			mth+=12;
@@ -44,7 +81,7 @@ public class ConvertDate {
 		int c = (int) (365.25 * (yr + 4716));
 		int d = (int) (30.6 * (mth+1));
 		
-		JulianDay= c + d + day + b -1524.5;
+		JulianDay= c + d + day + b + tm -1524.5;
 		
 		return JulianDay;
 		
@@ -91,17 +128,9 @@ public class ConvertDate {
 		return gregDate;
 	}
 	
+	
 	public static void main (String args[]) {
-		
-		double JD;
-		
-		GregorianCalendar testDate=new GregorianCalendar(1988,5,19);
-		JD=toJulianDay(testDate);
-		System.out.println("Julian Date is " + JD);
-		
-		SimpleDateFormat date_format = new SimpleDateFormat("yyyyMMdd");
-		System.out.println(date_format.format(fromJulianDay(JD).getTime()));
-
+		JulianDay test = new JulianDay();
+		System.out.println ( test.MJD());
 	}
 }
-

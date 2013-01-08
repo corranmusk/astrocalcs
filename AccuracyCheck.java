@@ -1,7 +1,7 @@
 /*
  * AccuracyCheck.java
  * 
- * Copyright 2012 Corran <corran@R2>
+ * Copyright 2012 Corran Musk
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
