@@ -28,7 +28,7 @@ public class JulianDay {
 	double JD;
 	
 	public void JulianDay() {
-		JD=0;
+		this.JD=0;
 		// actually this is a place holder this is what will happen...
 		// get current date/time
 		// convert to JD
@@ -36,17 +36,17 @@ public class JulianDay {
 	
 	public void JulianDay(double DateValue){
 		// Constructor setting a value for the JD
-		JD=DateValue;
+		this.JD=DateValue;
 	}
 
 	public void JulianDay(GregorianCalendar GregDate){
 		// Consructor for GregorianCalendar object
-		JD=toJulianDay(GregDate);
+		this.JD=toJulianDay(GregDate);
 	}
 	
 	public double MJD (){
 		// Returns the Modified Julian Day of the current JD
-		double MJDay=MJD(JD);
+		double MJDay=MJD(this.JD);
 		return MJDay;
 	}
 	
@@ -77,9 +77,9 @@ public class JulianDay {
 		}
 		
 		int a = yr/100;
-		int b = 2 -a + (int) (a/4);
-		int c = (int) (365.25 * (yr + 4716));
-		int d = (int) (30.6 * (mth+1));
+		double b = 2 -a + (int) (a/4);
+		double c = (int) (365.25 * (yr + 4716));
+		double d = (int) (30.6 * (mth+1));
 		
 		JulianDay= c + d + day + b + tm -1524.5;
 		
@@ -92,8 +92,8 @@ public class JulianDay {
 		GregorianCalendar gregDate;
 		
 		JulianDay +=0.5;
-		int z = (int) JulianDay;
-		double f= JulianDay - z;
+		int 	z = (int) JulianDay;
+		double f = JulianDay - z;
 		
 		int a;
 		if ( z<2299161){
@@ -102,13 +102,13 @@ public class JulianDay {
 			int alpha= (int) (( z-1867216.25)/36524.25);
 			a=z+1+alpha- (int) (alpha/4);
 		}
-		int b = a+1524;
-		int c = (int) ((b-122.1)/365.25);
+		double b = a+1524.0;
+		double c = (int) ((b-122.1)/365.25);
 		int d = (int) (365.25 * c);
 		int e = (int) ((b-d)/30.6001);
 		
 		int tmp = (int) (30.6001 *e);
-		double dom = b - d - tmp + f; // need to add f to this but worried about doubles etc..
+		double dom = b - d - tmp + f; 
 		
 		int mth;
 		if(e<14){
@@ -118,9 +118,9 @@ public class JulianDay {
 		}
 		int yr;
 		if(mth>2){
-			yr=c-4716;
+			yr=(int) c-4716;
 		} else {
-			yr=c-4715;
+			yr=(int) c-4715;
 		}
 		
 		gregDate = new GregorianCalendar(yr,mth-1,(int) dom);
@@ -128,9 +128,16 @@ public class JulianDay {
 		return gregDate;
 	}
 	
+	public static void displayDay(double JDay) {
+		
+		System.out.println ("Julian Day is : " + JDay);
 	
-	public static void main (String args[]) {
-		JulianDay test = new JulianDay();
-		System.out.println ( test.MJD());
 	}
+	
+	public void displayDay(){
+		
+		displayDay(this.JD);
+		
+	}
+			
 }

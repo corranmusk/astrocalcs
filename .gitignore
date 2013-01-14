@@ -1,4 +1,6 @@
 *.class
+Astrocalcs.geany
+.gitignore
 
 # Package Files #
 *.jar
