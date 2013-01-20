@@ -3,6 +3,7 @@
  * 
  * Copyright 2013 Corran Musk 
  * 
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -27,6 +28,8 @@ import java.awt.event.*;
 
 public class JulianDayCalculator extends JFrame implements ActionListener {
 
+    final public static int CALCBUTTON=1;
+    
     JulianDay test = new JulianDay();
     
     JTextField  JDay = new JTextField(20);
@@ -45,11 +48,11 @@ public class JulianDayCalculator extends JFrame implements ActionListener {
         Container content = this.getContentPane();
         content.setLayout(flow);
         
+        JBut.addActionListener(this) ;
         content.add(JDayLab);
         content.add(JDay);
         content.add(JBut);
         content.add(GDate);
-        
         setVisible(true);
         
     }
@@ -57,11 +60,15 @@ public class JulianDayCalculator extends JFrame implements ActionListener {
     public static void main(String[] args) {
         
         JulianDayCalculator frame = new JulianDayCalculator();
-	
+  	
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Object source=e.getSource();
+        if(source==JBut){
+            test.JulianDay(Double.parseDouble(JDay.getText()));
+            GDate.setText("MJD is " + test.MJD());
+        }
     }
 }
