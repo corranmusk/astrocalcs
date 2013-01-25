@@ -28,11 +28,9 @@ import java.awt.event.*;
 
 public class JulianDayCalculator extends JFrame implements ActionListener {
 
-    final public static int CALCBUTTON=1;
-    
     JulianDay test = new JulianDay();
     
-    JTextField  JDay = new JTextField(20);
+    JTextField  JDay = new JTextField(10);
     JLabel      JDayLab = new JLabel ("Julian Day");
     JButton     JBut = new JButton("Calculate");
     JLabel      GDate = new JLabel("GDATE:");
@@ -42,7 +40,7 @@ public class JulianDayCalculator extends JFrame implements ActionListener {
         super("Julian Day Calculator");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//enableEvents(AWTEvent.WINDOW_EVENT_MASK);
-        setSize(350,100);
+        setSize(250,100);
         
         FlowLayout flow = new FlowLayout();
         Container content = this.getContentPane();
@@ -57,18 +55,24 @@ public class JulianDayCalculator extends JFrame implements ActionListener {
         
     }
     
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        Object source=ae.getSource();
+        if(source==JBut){
+            try {
+                test.JulianDay(Double.parseDouble(JDay.getText()));
+            } catch (Exception e){
+                // do nowt... okay, set it internally to zero
+                test.JulianDay(0);
+            }
+            GDate.setText("GDate is :"+ test.displayGregDate());
+        }
+    }
+
     public static void main(String[] args) {
         
         JulianDayCalculator frame = new JulianDayCalculator();
   	
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object source=e.getSource();
-        if(source==JBut){
-            test.JulianDay(Double.parseDouble(JDay.getText()));
-            GDate.setText("MJD is " + test.MJD());
-        }
-    }
 }

@@ -22,26 +22,31 @@
  */
 
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class JulianDay {
 	
 	double JD;
+        GregorianCalendar gregorianDate;
 	
 	public void JulianDay() {
 		this.JD=0;
 		// actually this is a place holder this is what will happen...
 		// get current date/time
 		// convert to JD
+                this.gregorianDate=fromJulianDay(this.JD);
 	}
 	
 	public void JulianDay(double DateValue){
 		// Constructor setting a value for the JD
 		this.JD=DateValue;
+                this.gregorianDate=fromJulianDay(this.JD);
 	}
 
 	public void JulianDay(GregorianCalendar GregDate){
 		// Consructor for GregorianCalendar object
 		this.JD=toJulianDay(GregDate);
+                this.gregorianDate=GregDate;
 	}
 	
 	public double MJD (){
@@ -128,9 +133,35 @@ public class JulianDay {
 		return gregDate;
 	}
 	
-	public static void displayDay(double JDay) {
+        
+        public static String displayGregDate(GregorianCalendar gregDate){
+            
+            String tmp="";
+            
+            tmp+=gregDate.get(GregorianCalendar.DAY_OF_MONTH);
+            tmp+="/";
+            tmp+=(gregDate.get(GregorianCalendar.MONTH)+1);
+            tmp+="/";
+            tmp+=gregDate.get(GregorianCalendar.YEAR);
+            tmp+=" ";
+            tmp+=gregDate.get(GregorianCalendar.HOUR_OF_DAY);
+            tmp+=":";
+            tmp+=gregDate.get(GregorianCalendar.MINUTE);
+            tmp+=":";
+            tmp+=gregDate.get(GregorianCalendar.SECOND);
+            
+            return tmp;
+        }
+        
+        public String displayGregDate(){
+            
+            return displayGregDate(this.gregorianDate);
+            
+        }
+	
+        public static String displayDay(double JDay) {
 		
-		System.out.println ("Julian Day is : " + JDay);
+		return  "Julian Day is : " + JDay;
 	
 	}
 	
