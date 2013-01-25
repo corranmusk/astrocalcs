@@ -128,7 +128,11 @@ public class JulianDay {
 			yr=(int) c-4715;
 		}
 		
-		gregDate = new GregorianCalendar(yr,mth-1,(int) dom);
+                int hrs = (int) (f*24.0);
+                int mins = (int) ((f-(hrs/24.0))*60);
+                int secs = (int) ((f -(hrs/24.0) - (mins/60.0)) *3600);
+                
+		gregDate = new GregorianCalendar(yr,mth-1,(int) dom,hrs,mins,secs);
 		
 		return gregDate;
 	}
