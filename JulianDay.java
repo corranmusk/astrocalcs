@@ -129,8 +129,8 @@ public class JulianDay {
 		}
 		
                 int hrs = (int) (f*24.0);
-                int mins = (int) ((f-(hrs/24.0))*60);
-                int secs = (int) ((f -(hrs/24.0) - (mins/60.0)) *3600);
+                int mins = (int) ((f-(hrs/24.0))*60*24);
+                int secs = (int) ((f -(hrs/24.0) - (mins/(60.0*24))) *3600*24);
                 
 		gregDate = new GregorianCalendar(yr,mth-1,(int) dom,hrs,mins,secs);
 		
