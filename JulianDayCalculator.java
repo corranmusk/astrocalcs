@@ -29,50 +29,48 @@ import java.awt.event.*;
 public class JulianDayCalculator extends JFrame implements ActionListener {
 
     JulianDay test = new JulianDay();
-    
-    JTextField  JDay = new JTextField(String.valueOf(test.getJD()),10);
-    JLabel      JDayLab = new JLabel ("Julian Day");
-    JButton     JBut = new JButton("Calculate");
-    JLabel      GDate = new JLabel("GDATE:");
-    
+    JTextField JDay = new JTextField(String.valueOf(test.getJD()), 10);
+    JLabel JDayLab = new JLabel("Julian Day");
+    JButton JBut = new JButton("Calculate");
+    JLabel GDate = new JLabel("GDATE:" + test.displayGregDate());
+
     public JulianDayCalculator() {
 
         super("Julian Day Calculator");
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//enableEvents(AWTEvent.WINDOW_EVENT_MASK);
-        setSize(250,100);
-        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+        setSize(250, 100);
+
         FlowLayout flow = new FlowLayout();
         Container content = this.getContentPane();
         content.setLayout(flow);
-        
-        JBut.addActionListener(this) ;
+
+        JBut.addActionListener(this);
         content.add(JDayLab);
         content.add(JDay);
         content.add(JBut);
         content.add(GDate);
         setVisible(true);
-        
+
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent ae) {
-        Object source=ae.getSource();
-        if(source==JBut){
+        Object source = ae.getSource();
+        if (source == JBut) {
             try {
                 test.setJD(Double.parseDouble(JDay.getText()));
-            } catch (Exception e){
+            } catch (Exception e) {
                 // do nowt... okay, set it internally to zero
                 test.setJD(0);
             }
-            GDate.setText("GDate is :"+ test.displayGregDate());
+            GDate.setText("GDate is :" + test.displayGregDate());
         }
     }
 
     public static void main(String[] args) {
-        
-        JulianDayCalculator frame = new JulianDayCalculator();
-  	
-    }
 
+        JulianDayCalculator frame = new JulianDayCalculator();
+
+    }
 }

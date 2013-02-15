@@ -24,7 +24,7 @@ public class JulianDate {
          */
     }
     
-    public void JulianDate(GregorianCalendar gDate){
+    public JulianDate(GregorianCalendar gDate){
         /**
          * Constructor using a GregorianCalendar object. Converts to
          * JulianDate object
@@ -63,9 +63,13 @@ public class JulianDate {
        
         tmp.DAY_OF_MONTH=b-d - ((int)(30.6001 * e));
         tmp.MONTH=e-1;
-        if (e>13) tmp.MONTH-=12;
+        if (e>13) {
+            tmp.MONTH-=12;
+        }
         tmp.YEAR=c-4715;
-        if (tmp.MONTH>2) tmp.YEAR--;
+        if (tmp.MONTH>2) {
+            tmp.YEAR--;
+        }
        
         return tmp;
        
@@ -103,7 +107,7 @@ public class JulianDate {
         
         // for testing purposes!
         
-        JulianDate tmp=new JulianDate();
+        JulianDate tmp;
         GregorianCalendar test=new GregorianCalendar();
         Date testTime = new Date();
         test.setTime(testTime);
